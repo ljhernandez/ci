@@ -22,8 +22,12 @@ spec:
         repoURL: https://charts.jenkins.io
         targetRevision: 5.5.6
         helm:
-          valueFiles:
-            - ../values-{{env}}.yaml
+          values: |
+            controller:
+              admin:
+                username: "admin"
+                password: "admin"
+              serviceType: NodePort
       destination:
         server: https://kubernetes.default.svc
         namespace: jenkins
