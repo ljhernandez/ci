@@ -1,6 +1,5 @@
-admin:
-  username: "admin"
-  password: "admin"
 controller:
-  service:
-    type: NodePort
+  admin:
+    username: "admin"
+    password: "admin"
+  serviceType: NodePort
