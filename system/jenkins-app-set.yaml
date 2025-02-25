@@ -9,10 +9,6 @@ spec:
         elements:
           - env: dev
             test: test1
-#          - env: test
-#            test: test1
-#          - env: pro
-#            test: test1
   template:
     metadata:
       name: 'jenkins-{{test}}-{{env}}'
@@ -26,13 +22,8 @@ spec:
         repoURL: https://charts.jenkins.io
         targetRevision: 5.5.6
         helm:
-          values: |
-            admin:
-              username: "admin"
-              password: "admin"
-            controller:
-              service:
-                type: NodePort
+          valueFiles:
+            - values-{{env}}.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: jenkins
