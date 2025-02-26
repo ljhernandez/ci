@@ -20,7 +20,7 @@ spec:
       source:
         chart: charts/sonarqube
         repoURL: https://github.com/SonarSource/helm-chart-sonarqube.git
-        targetRevision: master
+#        targetRevision: master
       destination:
         server: https://kubernetes.default.svc
         namespace: code
