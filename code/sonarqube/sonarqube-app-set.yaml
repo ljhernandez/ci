@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: jenkins
+  name: sonarqube
   namespace: myargo
 spec:
   generators:
@@ -11,23 +11,16 @@ spec:
             test: test1
   template:
     metadata:
-      name: 'jenkins-{{test}}-{{env}}'
+      name: 'sonarqube'
       namespace: myargo
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: default
+      project: code
       source:
-        chart: jenkins
-        repoURL: https://charts.jenkins.io
-        targetRevision: 5.5.6
-        helm:
-          values: |
-            controller:
-              admin:
-                username: "admin"
-                password: "admin"
-              serviceType: NodePort
+        chart: charts/sonarqube
+        repoURL: https://github.com/SonarSource/helm-chart-sonarqube.git
+        targetRevision: master
       destination:
         server: https://kubernetes.default.svc
-        namespace: jenkins
+        namespace: code
