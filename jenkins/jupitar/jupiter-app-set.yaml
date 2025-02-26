@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: 'jenkins-{{jenkins}}-{{env}}'
+  namespace: myargo
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+            jenkins: jupiter
+  template:
+    metadata:
+      name: 'jenkins-{{jenkins}}-{{env}}'
+      namespace: myargo
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        chart: jenkins
+        repoURL: https://charts.jenkins.io
+        targetRevision: 5.5.6
+        helm:
+          values: |
+            controller:
+              admin:
+                username: "admin"
+                password: "admin"
+              serviceType: NodePort
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: jenkins
