@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: 'jenkins-{{jenkins}}-{{env}}'
+  name: 'jenkins-saturno'
   namespace: myargo
 spec:
   generators:
@@ -11,12 +11,12 @@ spec:
             jenkins: saturno
   template:
     metadata:
-      name: 'jenkins-{{jenkins}}-{{env}}'
+      name: 'jenkins-saturno'
       namespace: myargo
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: default
+      project: jenkins
       source:
         chart: jenkins
         repoURL: https://charts.jenkins.io

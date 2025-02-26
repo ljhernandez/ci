@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: jenkins
+  name: code
   namespace: myargo
 spec:
   description: ApplicationSet Project 1
